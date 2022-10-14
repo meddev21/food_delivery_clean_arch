@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart.dart';
 import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
 import 'package:food_delivery_clean_arch/src/core/error/failures.dart';
 import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart_history.dart';
@@ -26,7 +26,6 @@ class CartHistoryRepoImpl extends CartHistoryRepo {
     }
     cartsHistories.add(jsonEncode(CartHistoryModel(order: cartList)));
     box.write(AppConstants.CARTS_HISTORIES_LIST, cartsHistories);
-    // TODO: apply removeCart func from cartController
   }
 
   @override
