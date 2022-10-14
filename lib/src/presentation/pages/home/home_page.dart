@@ -19,7 +19,7 @@ class HomePage extends HookWidget {
       child: Text('Next page'),
     ),
     // Container(child: Center(child: Text('Next next page'),),),
-    CartHistory(), //TODO: add cart history
+    CartHistoryPage(), //TODO: add cart history
     const Center(
       child: Text('Next next next page'),
     ),
