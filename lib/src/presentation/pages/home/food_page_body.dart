@@ -19,6 +19,7 @@ class FoodPageBody extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PopularProductController controller = Get.find();
     final PageController pageController =
         usePageController(viewportFraction: 0.85);
 
@@ -38,36 +39,34 @@ class FoodPageBody extends HookWidget {
     return Column(
       children: [
         //slider section
-        GetBuilder<PopularProductController>(
-            builder: (popularProducts) => popularProducts.isLoaded
-                ? SizedBox(
-                    height: Dimensions.pageView,
+        controller.obx((state) => SizedBox(
+                    height: 320.h,
                     child: PageView.builder(
                         controller: pageController,
-                        itemCount: popularProducts.popularProductList.length,
+                        itemCount: state?.length,
                         itemBuilder: (context, index) {
                           return _buildPageItem(
-                              index, popularProducts.popularProductList[index]);
+                              index, state![index]);
                         }),
-                  )
-                : CircularProgressIndicator(
-                    color: AppColors.mainColor,
-                  )),
-        //dots
-        GetBuilder<PopularProductController>(
-            builder: (popularProducts) => DotsIndicator(
-                  dotsCount: popularProducts.popularProductList.isNotEmpty
-                      ? popularProducts.popularProductList.length
-                      : 1,
-                  position: currPageValue,
-                  decorator: DotsDecorator(
-                    activeColor: AppColors.mainColor,
-                    size: const Size.square(9.0),
-                    activeSize: const Size(18.0, 9.0),
-                    activeShape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0.sp)),
                   ),
-                )),
+                  onLoading: CircularProgressIndicator(
+                    color: AppColors.mainColor,
+                  )
+                  ),
+
+                         //dots
+                  controller.obx((state) => DotsIndicator(
+                    dotsCount: state!.isNotEmpty?state.length:1,
+                    position: currPageValue.value,
+                    decorator: DotsDecorator(
+                    activeColor: AppColors.mainColor,
+                    size: Size.square(9.w),
+                    activeSize: Size(18.w, 9.h),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.r)),
+                  )
+                    )),
+
         //popular text
         SizedBox(
           height: 3.63.h,
