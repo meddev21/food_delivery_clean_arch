@@ -1,5 +1,6 @@
-import 'package:food_delivery_clean_arch/src/data/models/product_model.dart';
 import 'package:get/get.dart';
+
+import 'package:food_delivery_clean_arch/src/data/models/product_model.dart';
 import 'package:food_delivery_clean_arch/src/domain/repositories/popular_product_repo.dart';
 import 'package:food_delivery_clean_arch/src/domain/entities/product.dart';
 import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart.dart';
