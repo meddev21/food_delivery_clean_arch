@@ -26,6 +26,19 @@ class ProductModel extends Product {
       updatedAt: json['updated_at'],
       typeId: json['type_id']);
 
+    factory ProductModel.empty()=>ProductModel(
+        id:0,
+        name: "",
+        description: "",
+        price: 0,
+        stars: 0,
+        img: "",
+        location: "",
+        createdAt: "",
+        updatedAt: "",
+        typeId: 0
+  );
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

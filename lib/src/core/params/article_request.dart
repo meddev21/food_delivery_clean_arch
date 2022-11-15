@@ -1,4 +1,4 @@
-import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
 
 class ArticlesRequestParams{
   final String apiKey;

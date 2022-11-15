@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:food_delivery_clean_arch/src/core/utils/app_colors.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/route_helper.dart';
+import 'package:food_delivery_clean_arch/src/config/app_colors.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/config/route_helper.dart';
 import 'package:food_delivery_clean_arch/src/presentation/controllers/index_controller.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/app_icon.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/big_text.dart';
@@ -81,7 +81,7 @@ class CartPage extends HookWidget {
                                         onTap: () {
                                           var popularIndex = Get.find<
                                                   PopularProductController>()
-                                              .popularProduct
+                                              .popularProducts
                                               .indexOf(
                                                   _cartList[index].product!);
                                           if (popularIndex >= 0) {

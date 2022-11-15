@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
 import 'package:food_delivery_clean_arch/src/core/error/failures.dart';
 import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart_history.dart';
 import 'package:food_delivery_clean_arch/src/data/models/cart/cart_history_model.dart';

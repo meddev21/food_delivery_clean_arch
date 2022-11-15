@@ -22,7 +22,7 @@ class CartHistoryController extends GetxController {
         Get.snackbar('Failure', l.toString());
         return [];
       }, 
-      (r) => r
+      (r) => r  
       );
   }
 

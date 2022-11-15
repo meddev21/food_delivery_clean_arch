@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:food_delivery_clean_arch/gen/assets.gen.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/route_helper.dart';
+import 'package:food_delivery_clean_arch/src/config/route_helper.dart';
 // TODO: this for load resource
 import 'package:food_delivery_clean_arch/src/presentation/controllers/index_controller.dart';
 

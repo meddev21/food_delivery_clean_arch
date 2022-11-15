@@ -14,7 +14,7 @@ class RecommendedProductController extends GetxController with StateMixin<List<P
     super.onInit();
   }
   var recommandedProduct = RxList<Product>([]);
-
+  
     fetchData() async {
     final either = await recommendedProductRepo.getRecommendedProductList();
     either.fold((Failure failure) {

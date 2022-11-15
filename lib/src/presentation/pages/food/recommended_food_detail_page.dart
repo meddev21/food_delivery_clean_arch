@@ -106,7 +106,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               ),
               pinned: true,
               backgroundColor: AppColors.buttonBackgroundColor,
-              expandedHeight: Dimensions.height30*10,
+              expandedHeight: 30.h*10,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(
                   // "http://192.168.1.34:8000/media/menu_images/food2.jpg",
@@ -184,8 +184,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             Container(
               height: Dimensions.bottomHeightBar,
               padding: EdgeInsets.only(
-                  top: Dimensions.height30,
-                  bottom: Dimensions.height30,
+                  top: 30.h,
+                  bottom: 30.h,
                   left: 5.09.w,
                   right: 5.09.w
               ),

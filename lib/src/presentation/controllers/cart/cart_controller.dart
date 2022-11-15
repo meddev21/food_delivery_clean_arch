@@ -65,11 +65,17 @@ class CartController extends GetxController {
           .reduce((value, element) => value + element)
       : 0;
 
+  int get totalItems => _items.isNotEmpty
+      ? _items.values
+          .map((e) => e.quantity ?? 0)
+          .reduce((value, element) => value + element)
+      : 0;
+
   void clear() {
     _items = {};
     update();
   }
-  
+
   void saveToHistory() {
     cartHistoryController.saveToHistory(items.values.toList());
     cartRepo.removeCart();

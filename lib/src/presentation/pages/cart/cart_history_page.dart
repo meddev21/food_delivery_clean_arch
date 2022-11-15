@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:food_delivery_clean_arch/src/core/utils/app_colors.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/config/app_colors.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/app_icon.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/big_text.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/small_text.dart';

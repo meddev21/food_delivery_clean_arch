@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
 import 'package:food_delivery_clean_arch/src/core/params/api_request.dart';
 
 class ApiClient extends GetConnect implements GetxService{

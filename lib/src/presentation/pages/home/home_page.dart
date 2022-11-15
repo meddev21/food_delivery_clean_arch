@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../index_pages.dart';
-import 'package:food_delivery_clean_arch/src/core/utils/app_colors.dart';
+import 'package:food_delivery_clean_arch/src/config/app_colors.dart';
 
 class HomePage extends HookWidget {
   HomePage({super.key});
