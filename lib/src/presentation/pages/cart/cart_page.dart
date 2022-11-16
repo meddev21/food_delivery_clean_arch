@@ -91,7 +91,7 @@ class CartPage extends HookWidget {
                                           } else {
                                             var recommendedIndex = Get.find<
                                                     RecommendedProductController>()
-                                                .recommandedProduct
+                                                .recommandedProducts
                                                 .indexOf(
                                                     _cartList[index].product!);
                                             Get.toNamed(

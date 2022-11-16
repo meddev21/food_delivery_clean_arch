@@ -11,7 +11,7 @@ import 'cart/cart_controller.dart';
 class PopularProductController extends GetxController with StateMixin<List<Product>>, ScrollMixin{
   final PopularProductRepo popularProductRepo;
   final CartController cartController;
-  PopularProductController(this.popularProductRepo, this.cartController);
+  PopularProductController({required this.popularProductRepo, required this.cartController});
   
   @override
   void onInit() {

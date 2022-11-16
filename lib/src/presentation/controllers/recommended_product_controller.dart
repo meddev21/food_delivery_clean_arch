@@ -11,7 +11,7 @@ class RecommendedProductController extends GetxController with StateMixin<List<P
   final RecommendedProductRepo recommendedProductRepo;
   final CartController cartController;
 
-  RecommendedProductController(this.recommendedProductRepo, this.cartController);
+  RecommendedProductController({required this.recommendedProductRepo, required this.cartController});
   
   @override
   void onInit() {

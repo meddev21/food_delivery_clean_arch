@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:food_delivery_clean_arch/src/core/network/network_info.dart';
-import 'app_constants.dart';
 import 'package:food_delivery_clean_arch/src/core/resources/api_client.dart';
-import 'package:food_delivery_clean_arch/src/data/datasources/local/app_database.dart';
-import 'package:food_delivery_clean_arch/src/data/datasources/remote/news_api_service.dart';
-import 'package:food_delivery_clean_arch/src/data/datasources/local/news_local_service.dart';
-import 'package:food_delivery_clean_arch/src/data/repositories/articles_repository_impl.dart';
+import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
+import 'package:food_delivery_clean_arch/src/data/repositories/index_repository.dart';
+import 'package:food_delivery_clean_arch/src/presentation/controllers/index_controller.dart';
 
 // here we initialize essential system dependencies like -Database, network_checker,
 //language service repo and controller GetStorage,  Get connect-
@@ -15,31 +15,42 @@ import 'package:food_delivery_clean_arch/src/data/repositories/articles_reposito
 //because implementation who has the function body) of the project
 class DependencyCreator {
   static init() async {
-    // Define need later constant like GetStorage, Database instante
-    final database =
-        await $FloorAppDatabase.databaseBuilder(DatabaseName).build();
-
     // Systems
     // Internet Checker
     Get.lazyPut(() => InternetConnectionChecker(), fenix: true);
     Get.lazyPut(() => NetworkInfoImpl(Get.find()), fenix: true);
     // Api Client
-    Get.lazyPut(() => ApiClient(BaseUrl), fenix: true);
-    // Database
-    Get.lazyPut(() => database, fenix: true);
+    Get.lazyPut(() => ApiClient(AppConstants.BASE_URL), fenix: true);
+    // Storage
+    await GetStorage.init();
+    final box = GetStorage();
+    Get.lazyPut(() => box);
 
-    // Services
-    // Remote
-    Get.lazyPut(() => NewsApiService(Get.find()), fenix: true);
-    // Local
-    Get.lazyPut(() => NewsLocalService(Get.find()), fenix: true);
-    
-    // Repository
-    Get.lazyPut(() => ArticlesRepositoryImpl(
-        newsApiService: Get.find(),
-        newsLocalService: Get.find(),
-        // here [ArticlesRepositoryImpl] need NetworkInfo  the abstract not implement but abstract 
-        // has no body fuction so we injected with Get.find() with type of the implement [NetworkInfoImpl] 
-        networkInfo: Get.find<NetworkInfoImpl>()), fenix: true);
+    //repos
+    //popular
+    Get.lazyPut(() => PopularProductRepoImpl(Get.find<ApiClient>()));
+    //recommended
+    Get.lazyPut(() => RecommendedProductRepoImpl(Get.find<ApiClient>()));
+    //cart
+    Get.lazyPut(() => CartRepoImpl(Get.find<GetStorage>()));
+    //cart history
+    Get.lazyPut(() => CartHistoryRepoImpl(Get.find<GetStorage>()));
+
+    //controllers
+    //cart history
+    Get.lazyPut(() => CartHistoryController(
+        cartHistoryRepo: Get.find<CartHistoryRepoImpl>()));
+    //cart
+    Get.lazyPut(() => CartController(
+        cartRepo: Get.find<CartRepoImpl>(),
+        cartHistoryController: Get.find<CartHistoryController>()));
+    //popular
+    Get.lazyPut(() => PopularProductController(
+        popularProductRepo: Get.find<PopularProductRepoImpl>(),
+        cartController: Get.find<CartController>()));
+    //recommended
+    Get.lazyPut(() => RecommendedProductController(
+        recommendedProductRepo: Get.find<RecommendedProductRepoImpl>(),
+        cartController: Get.find<CartController>()));
   }
 }
