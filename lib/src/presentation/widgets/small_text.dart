@@ -21,7 +21,7 @@ class SmallText extends HookWidget {
       text,
       style: GoogleFonts.roboto(
           color: color,
-          fontSize: size==0?12.sp:size,
+          fontSize: size==0?10.sp:size,
           height: height
       ),
     );

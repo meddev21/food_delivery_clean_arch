@@ -24,7 +24,7 @@ class AppColumn extends HookWidget {
           size: size!,
         ),
         SizedBox(
-          height: 10.h,
+          height: 8.h,
         ),
         Row(
           children: [
@@ -52,7 +52,7 @@ class AppColumn extends HookWidget {
           ],
         ),
         SizedBox(
-          height: 20.h,
+          height: 8.h,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

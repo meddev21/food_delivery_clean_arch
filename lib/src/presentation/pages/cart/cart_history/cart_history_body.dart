@@ -1,58 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import 'package:food_delivery_clean_arch/src/config/app_colors.dart';
 import 'package:food_delivery_clean_arch/src/config/app_constants.dart';
-import 'package:food_delivery_clean_arch/src/presentation/widgets/app_icon.dart';
+import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart_history.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/big_text.dart';
 import 'package:food_delivery_clean_arch/src/presentation/widgets/small_text.dart';
-import 'package:food_delivery_clean_arch/src/presentation/controllers/cart/cart_history_controller.dart';
-import 'package:food_delivery_clean_arch/src/domain/entities/cart/cart_history.dart';
 
-class CartHistoryPage extends HookWidget {
-  const CartHistoryPage({super.key});
+class CartHistoryBody extends HookWidget {
+  const CartHistoryBody(this.item, {super.key});
+
+  final CartHistory item;
 
   @override
   Widget build(BuildContext context) {
-    CartHistoryController controller = Get.find<CartHistoryController>();
-    List<CartHistory> cartHistoryList =
-        controller.cartHistoryList.reversed.toList();
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 100.h,
-            width: double.maxFinite,
-            color: AppColors.mainColor,
-            padding: EdgeInsets.only(top: 5.33.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BigText(
-                  text: "Cart History",
-                  color: Colors.white,
-                ),
-                AppIcon(
-                  icon: Icons.shopping_cart_outlined,
-                  iconColor: AppColors.mainColor,
-                  backgroundColor: AppColors.yellowColor,
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: 20.h, left: 5.09.w, right: 5.09.w),
-              child: MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
-                child: ListView(
-                  children: [
-                    for (int i = 0; i < cartHistoryList.length; i++)
-                      Container(
+    return Container(
                         height: 120.h,
                         margin: EdgeInsets.only(bottom: 20.h),
                         child: Column(
@@ -61,7 +25,7 @@ class CartHistoryPage extends HookWidget {
                             (() {
                               DateFormat f = DateFormat('yyyy/MM/dd hh:mm a');
                               String strTime = f.format(DateTime.parse(
-                                  cartHistoryList[i].orderTime!));
+                                  item.orderTime!));
                               return BigText(text: strTime);
                             }()),
                             SizedBox(
@@ -74,11 +38,11 @@ class CartHistoryPage extends HookWidget {
                                 Wrap(
                                   direction: Axis.horizontal,
                                   children: List.generate(
-                                      cartHistoryList[i].order!.length,
+                                      item.order!.length,
                                       (index) => index <= 2
                                           ? Container(
-                                              height: 20.h * 4,
-                                              width: 5.09.w * 4,
+                                              height: 70.h,
+                                              width: 70.h,
                                               margin: EdgeInsets.only(
                                                 left: 5.w,
                                               ),
@@ -91,14 +55,14 @@ class CartHistoryPage extends HookWidget {
                                                       image: NetworkImage(
                                                           AppConstants
                                                                   .BASE_URL +
-                                                              cartHistoryList[i]
+                                                              item
                                                                   .order![index]
                                                                   .img!))),
                                             )
                                           : Container()),
                                 ),
                                 SizedBox(
-                                  height: 20.h * 4,
+                                  height: 80.h,
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -109,18 +73,18 @@ class CartHistoryPage extends HookWidget {
                                           color: AppColors.titleColor),
                                       BigText(
                                         text:
-                                            "${cartHistoryList[i].order!.length} Items",
+                                            "${item.order!.length} Items",
                                         color: AppColors.titleColor,
                                       ),
                                       Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 10.w,
-                                            vertical: 10.h / 2),
+                                            vertical: 5.h),
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(15.r / 3),
+                                                BorderRadius.circular(5.r),
                                             border: Border.all(
-                                                width: 1,
+                                                width: 1.w,
                                                 color: AppColors.mainColor)),
                                         child: SmallText(
                                             text: "one more",
@@ -133,14 +97,6 @@ class CartHistoryPage extends HookWidget {
                             )
                           ],
                         ),
-                      )
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+                      );
   }
 }

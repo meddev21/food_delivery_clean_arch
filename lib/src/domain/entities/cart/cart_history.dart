@@ -3,7 +3,7 @@ import 'cart.dart';
 
 // ignore: must_be_immutable
 abstract class CartHistory extends Equatable{
-    List<Cart>? order;
+  List<Cart>? order;
   String? orderTime;
   
   CartHistory({this.order}): orderTime = DateTime.now().toString();

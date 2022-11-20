@@ -21,7 +21,7 @@ class CartRepoImpl extends CartRepo {
   void addToCartList(List<Cart> cartList) {
     cart = List.from(cartList.map((e) => jsonEncode(e)));
     box.write(AppConstants.CART_LIST, cart);
-  }
+  }       
 
   @override
   Either<Failure, List<Cart>> getCartList() {

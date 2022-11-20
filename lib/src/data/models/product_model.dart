@@ -25,7 +25,7 @@ class ProductModel extends Product {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       typeId: json['type_id']);
-
+      
     factory ProductModel.empty()=>ProductModel(
         id:0,
         name: "",
@@ -54,17 +54,17 @@ class ProductModel extends Product {
     return data;
   }
   // ignore: recursive_getters
-  int? get totalSize => totalSize;
+  // int? get totalSize => totalSize;
   set totalSize(int? totalSize) => totalSize = totalSize;
   // ignore: recursive_getters, annotate_overrides
-  int? get typeId => typeId;
+  // int? get typeId => typeId;
   @override
   set typeId(int? typeId) => typeId = typeId;
   // ignore: recursive_getters
-  int? get offset => offset;
+  // int? get offset => offset;
   set offset(int? offset) => offset = offset;
   // ignore: recursive_getters
-  List<ProductModel> get products => products;
+  // List<ProductModel> get products => products;
   set products(List<ProductModel> products) => products = products;
 
 }

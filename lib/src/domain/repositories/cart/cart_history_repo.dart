@@ -9,5 +9,5 @@ abstract class CartHistoryRepo{
 
   void addToCartHistoryList(List<Cart> cartList);
 
-  Either<Failure, List<CartHistory>> getCartsHistories();
+  Either<Failure, List<CartHistory>>  getCartsHistories();
 }

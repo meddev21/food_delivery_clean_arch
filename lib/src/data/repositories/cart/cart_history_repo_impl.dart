@@ -32,7 +32,7 @@ class CartHistoryRepoImpl extends CartHistoryRepo {
   Either<Failure, List<CartHistory>> getCartsHistories() {
     if (box.hasData(AppConstants.CARTS_HISTORIES_LIST)) {
       List<dynamic> rawCart =
-          box.read(AppConstants.CART_LIST).map((e) => jsonDecode(e)).toList();
+          box.read(AppConstants.CARTS_HISTORIES_LIST).map((e) => jsonDecode(e)).toList();
       return Right(rawCart.map((e) => CartHistoryModel.fromJson(e)).toList());
     }
     return const Left(EmptyCacheFailure());

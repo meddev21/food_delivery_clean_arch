@@ -19,13 +19,14 @@ class PopularProductController extends GetxController with StateMixin<List<Produ
     super.onInit();
   }
   RxList<Product> popularProducts = RxList<Product>([]);
-  Rx<Product> popularProduct = Rx<Product>(ProductModel.empty());
-   
+  Product popularProduct = ProductModel.empty();
+
 
   int _quantity = 0;
   int get quantity => _quantity;
   int _inCartItems = 0;
   int get inCartItems => _inCartItems + _quantity;
+  RxBool canAdd = false.obs;
 
     fetchData() async {
     final either = await popularProductRepo.getPopularProductList();
@@ -41,12 +42,18 @@ class PopularProductController extends GetxController with StateMixin<List<Produ
     });
   }
 
+toggleCanAdd(bool vale){
+  canAdd.value = vale;
+  update();
+}
+
     void initProduct(int productId){
     _quantity = 0;
     _inCartItems = 0;
-    popularProduct.value = popularProducts[productId]; 
-    if(cartController.existInCart(popularProduct.value)) {
-      _inCartItems = cartController.getQuantity(popularProduct.value);
+    canAdd.value = false;
+    popularProduct = popularProducts[productId]; 
+    if(cartController.existInCart(popularProduct)) {
+      _inCartItems = cartController.getQuantity(popularProduct);
     }
     //get from storage _inCartItems
   }
@@ -62,6 +69,11 @@ class PopularProductController extends GetxController with StateMixin<List<Produ
     _quantity = checkQuantity(_quantity+1);
   }else{
     _quantity = checkQuantity(_quantity-1);
+  }
+  if(_quantity == 0){
+      toggleCanAdd(false);
+  }else{
+    toggleCanAdd(true);
   }
   update();
 }
@@ -80,11 +92,9 @@ class PopularProductController extends GetxController with StateMixin<List<Produ
 
     void addItem(){
     // if(_quantity>0){
-      cartController.addItem(popularProduct.value, _quantity);
+      cartController.addItem(popularProduct, _quantity);
       _quantity = 0;
-      _inCartItems = cartController.getQuantity(popularProduct.value);
-      print('${popularProduct.value.id} has been add with $_inCartItems as quantity');
-      print('cart length is ${cartController.items.length}');
+      _inCartItems = cartController.getQuantity(popularProduct);
     // }else{
     //   Get.snackbar("Item count", "You should at least add an item in the cart!",
     //     backgroundColor: AppColors.mainColor,

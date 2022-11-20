@@ -7,28 +7,26 @@ import 'package:food_delivery_clean_arch/src/presentation/widgets/big_text.dart'
 import 'package:food_delivery_clean_arch/src/presentation/widgets/small_text.dart';
 import 'food_page_body.dart';
 
-
 class MainFoodPage extends HookWidget {
   const MainFoodPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-                top: 5.45.h, bottom: 1.81.h),
-            padding: EdgeInsets.only(
-              left: 5.09.w,
-              right: 5.09.w,
-            ),
-            child: Row(
+      body: Container(
+        margin: EdgeInsets.only(top: 30.h, bottom: 10.h),
+        padding: EdgeInsets.only(
+          left: 15.w,
+          right: 15.w,
+        ),
+        child: Column(
+          children: [
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
-                    BigText( 
+                    BigText(
                       text: 'Bangladesh',
                       color: AppColors.mainColor,
                     ),
@@ -45,35 +43,33 @@ class MainFoodPage extends HookWidget {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
-                      width: 5.45.h,
-                      height: 5.45.h,
+                      width: 35.h,
+                      height: 35.h,
                       decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(15.r),
+                          borderRadius: BorderRadius.circular(10.r),
                           color: AppColors.mainColor),
                       child: Icon(
                         Icons.search,
                         color: Colors.white,
-                        size: 2.9.h,
+                        size: 20.h,
                       ),
                     ),
                   ),
                 )
               ],
             ),
-          ),
-          Expanded(
-              child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overScroll) {
-              overScroll.disallowIndicator();
-              return false;
-            },
-            child: const SingleChildScrollView(child: FoodPageBody()),
-          ))
-        ],
+            Expanded(
+                child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overScroll) {
+                overScroll.disallowIndicator();
+                return false;
+              },
+              child: const SingleChildScrollView(child: FoodPageBody()),
+            ))
+          ],
+        ),
       ),
     );
   }

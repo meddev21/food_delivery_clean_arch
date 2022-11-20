@@ -14,8 +14,10 @@ class ExpandableTextWidget extends HookWidget {
     final hiddenText = useState(true);
     String firstHalf = '';
     String secondHalf = '';
-
-    double textHeight = 150.h;
+    
+    double textHeight = 242.h;
+    double smallTextHeight = 1.5.h;
+    double smallTextSize = 15.sp;
 
     void toggleHiddenText() {
       hiddenText.value = !hiddenText.value;
@@ -30,39 +32,41 @@ class ExpandableTextWidget extends HookWidget {
         secondHalf = '';
       }
     });
-
     return Container(
       child: secondHalf.isEmpty
           ? SmallText(
-              height: 1.8.h,
+              height: smallTextHeight,
               color: AppColors.paraColor,
-              size: 16.sp,
+              size: smallTextSize,
               text: firstHalf)
           : Column(
               children: [
                 SmallText(
-                    height: 1.8.h,
+                    height: smallTextHeight,
                     color: AppColors.paraColor,
-                    size: 16.sp,
+                    size: smallTextSize,
                     text: hiddenText.value
                         ? ("$firstHalf...")
                         : (firstHalf + secondHalf)),
-                InkWell(
-                  onTap: toggleHiddenText,
-                  child: Row(
-                    children: [
-                      SmallText(
-                        size: 16.sp,
-                        text: hiddenText.value ? "Show more" : "Show less",
-                        color: AppColors.mainColor,
-                      ),
-                      Icon(
-                        hiddenText.value
-                            ? Icons.arrow_drop_down
-                            : Icons.arrow_drop_up,
-                        color: AppColors.mainColor,
-                      )
-                    ],
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.h),
+                  child: InkWell(
+                    onTap: toggleHiddenText,
+                    child: Row(
+                      children: [
+                        SmallText(
+                          size: smallTextSize,
+                          text: hiddenText.value ? "Show more" : "Show less",
+                          color: AppColors.mainColor,
+                        ),
+                        Icon(
+                          hiddenText.value
+                              ? Icons.arrow_drop_down
+                              : Icons.arrow_drop_up,
+                          color: AppColors.mainColor,
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

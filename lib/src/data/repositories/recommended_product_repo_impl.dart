@@ -10,7 +10,7 @@ import 'package:food_delivery_clean_arch/src/core/error/failures.dart';
 import 'package:food_delivery_clean_arch/src/core/error/exceptions.dart';
 import 'package:food_delivery_clean_arch/src/core/params/api_request.dart';
 import 'package:food_delivery_clean_arch/src/domain/entities/product.dart';
-import 'package:food_delivery_clean_arch/src/data/models/product_model.dart';
+import 'package:food_delivery_clean_arch/src/data/models/menu_model.dart';
 import 'package:food_delivery_clean_arch/src/domain/repositories/recommended_product_repo.dart';
 
 class RecommendedProductRepoImpl extends RecommendedProductRepo {
@@ -28,7 +28,7 @@ class RecommendedProductRepoImpl extends RecommendedProductRepo {
       Response response = await apiClient.demand(params);
       if (response.isOk) {
         recommandedProductList
-            .addAll(ProductModel.fromJson(response.body).products);
+            .addAll(MenuModel.fromJson(response.body).products);
             return Right(recommandedProductList);
       } else {
         return Left(Failure.responseFailure(

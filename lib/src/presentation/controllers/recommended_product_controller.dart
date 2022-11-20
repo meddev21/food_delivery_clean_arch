@@ -25,6 +25,7 @@ class RecommendedProductController extends GetxController with StateMixin<List<P
   int get quantity => _quantity;
   int _inCartItems = 0;
   int get inCartItems => _inCartItems + _quantity;
+  RxBool canAdd = false.obs;
 
     fetchData() async {
     final either = await recommendedProductRepo.getRecommendedProductList();
@@ -40,10 +41,15 @@ class RecommendedProductController extends GetxController with StateMixin<List<P
     });
   } 
 
+toggleCanAdd(bool vale){
+  canAdd.value = vale;
+  update();
+}
 
   void initProduct(int productId){
     _quantity = 0;
     _inCartItems = 0;
+    canAdd.value = false;
     recommandedProduct.value = recommandedProducts[productId]; 
     if(cartController.existInCart(recommandedProduct.value)) {
       _inCartItems = cartController.getQuantity(recommandedProduct.value);
@@ -51,11 +57,18 @@ class RecommendedProductController extends GetxController with StateMixin<List<P
     //get from storage _inCartItems
   }
 
+    int get totalItems => cartController.totalItems;
+
     void setQuantity(bool isIncrement){
   if(isIncrement){
     _quantity = checkQuantity(_quantity+1);
   }else{
     _quantity = checkQuantity(_quantity-1);
+  }
+    if(_quantity == 0){
+      toggleCanAdd(false);
+  }else{
+    toggleCanAdd(true);
   }
   update();
 }

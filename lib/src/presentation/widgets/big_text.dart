@@ -24,7 +24,7 @@ class BigText extends HookWidget {
       style: GoogleFonts.roboto(
         color: color,
         fontWeight: FontWeight.w400,
-        fontSize: size==0?15.sp:size
+        fontSize: size==0?18.sp:size
       ),
     );
   }

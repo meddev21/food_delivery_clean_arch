@@ -58,6 +58,8 @@ class CartPage extends HookWidget {
               right: 5.09.w,
               child: Container(
                 margin: EdgeInsets.only(top: 15.h),
+                            padding: EdgeInsets.only(
+                top: 25.h, bottom: 25.h, left: 20.w, right: 20.w),
                 child: NotificationListener<OverscrollIndicatorNotification>(
                   onNotification: (overScroll) {
                     overScroll.disallowIndicator();
@@ -68,11 +70,11 @@ class CartPage extends HookWidget {
                     removeTop: true,
                     child: GetBuilder<CartController>(
                       builder: (cartController) {
-                        var _cartList = cartController.getItems;
+                        var cartList = cartController.getItems;
                         // _cartList = [];
                         return ListView.builder(
-                            itemCount: _cartList.length,
-                            itemBuilder: (context, index) => Container(
+                            itemCount: cartList.length,
+                            itemBuilder: (context, index) => SizedBox(
                                   height: 100.h,
                                   width: double.maxFinite,
                                   child: Row(
@@ -83,7 +85,7 @@ class CartPage extends HookWidget {
                                                   PopularProductController>()
                                               .popularProducts
                                               .indexOf(
-                                                  _cartList[index].product!);
+                                                  cartList[index].product!);
                                           if (popularIndex >= 0) {
                                             Get.toNamed(
                                                 RouteHelper.getPopularFood(
@@ -93,7 +95,7 @@ class CartPage extends HookWidget {
                                                     RecommendedProductController>()
                                                 .recommandedProducts
                                                 .indexOf(
-                                                    _cartList[index].product!);
+                                                    cartList[index].product!);
                                             Get.toNamed(
                                                 RouteHelper.getRecommendedFood(
                                                     recommendedIndex,
@@ -111,7 +113,7 @@ class CartPage extends HookWidget {
                                                   fit: BoxFit.cover,
                                                   image: NetworkImage(
                                                       AppConstants.BASE_URL +
-                                                          _cartList[index]
+                                                          cartList[index]
                                                               .img!))),
                                         ),
                                       ),
@@ -128,7 +130,7 @@ class CartPage extends HookWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             BigText(
-                                              text: _cartList[index].name!,
+                                              text: cartList[index].name!,
                                               color: Colors.black54,
                                             ),
                                             SmallText(text: 'Spicy'),
@@ -139,7 +141,7 @@ class CartPage extends HookWidget {
                                               children: [
                                                 BigText(
                                                   text:
-                                                      "\$ ${_cartList[index].price!}",
+                                                      "\$ ${cartList[index].price!}",
                                                   color: Colors.redAccent,
                                                 ),
                                                 Container(
@@ -160,7 +162,7 @@ class CartPage extends HookWidget {
                                                       GestureDetector(
                                                           onTap: () =>
                                                               cartController.addItem(
-                                                                  _cartList[
+                                                                  cartList[
                                                                           index]
                                                                       .product!,
                                                                   -1),
@@ -169,21 +171,21 @@ class CartPage extends HookWidget {
                                                               color: AppColors
                                                                   .signColor)),
                                                       SizedBox(
-                                                        width: 10.w / 2,
+                                                        width: 5.w,
                                                       ),
-                                                      Container(
-                                                          width: 45.w / 2,
+                                                      SizedBox(
+                                                          width: 22.5.w,
                                                           child: Center(
                                                               child: BigText(
                                                                   text:
                                                                       '${cartController.getItems[index].quantity!}'))),
                                                       SizedBox(
-                                                        width: 10.w / 2,
+                                                        width: 5.w,
                                                       ),
                                                       GestureDetector(
                                                           onTap: () =>
                                                               cartController.addItem(
-                                                                  _cartList[
+                                                                  cartList[
                                                                           index]
                                                                       .product!,
                                                                   1),
@@ -211,8 +213,8 @@ class CartPage extends HookWidget {
       bottomNavigationBar: GetBuilder<CartController>(
           builder: (cartController) => Container(
                 height: 120.h,
-                padding: EdgeInsets.only(
-                    top: 30.h, bottom: 30.h, left: 5.09.w, right: 5.09.w),
+            padding: EdgeInsets.only(
+                top: 25.h, bottom: 25.h, left: 20.w, right: 20.w),
                 decoration: BoxDecoration(
                     color: AppColors.buttonBackgroundColor,
                     borderRadius: BorderRadius.only(
@@ -223,42 +225,48 @@ class CartPage extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(
-                        top: 20.h,
-                        bottom: 20.h,
-                        left: 5.09.w,
-                        right: 5.09.w,
-                      ),
+                      width: 120.w,
+                        padding: EdgeInsets.only(
+                        top: 15.h,
+                        bottom: 15.h,
+                        left: 15.w,
+                        right: 15.w,
+                        ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
                         color: Colors.white,
                       ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          SizedBox(
-                              width: 100.w,
-                              child: Center(
-                                  child: BigText(
-                                      text:
-                                          '\$ ${cartController.totalAmount}'))),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                        ],
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Expanded(
+                            //   flex: 2,
+                            //   child: Container(),
+                            // ),
+                            Expanded(
+                              flex: 1,
+                              child: BigText(
+                                text: '  \$',
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: BigText(
+                                text: '   ${cartController.totalAmount}',
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     GestureDetector(
                       // onTap: ()=>popularProduct.addItem(product),
                       onTap: () => cartController.saveToHistory(),
                       child: Container(
                         padding: EdgeInsets.only(
-                          top: 20.h,
-                          bottom: 20.h,
-                          left: 5.09.w,
-                          right: 5.09.w,
+                        top: 15.h,
+                        bottom: 15.h,
+                        left: 15.w,
+                        right: 15.w,
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.r),
